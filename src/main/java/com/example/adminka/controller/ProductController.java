@@ -2,13 +2,14 @@ package com.example.adminka.controller;
 
 import com.example.adminka.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/products")
 public class ProductController {
 
@@ -16,8 +17,11 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping("/")
-    public List<Product> getProducts() {
-        return productService.getAllProducts();
+    public String getProducts(Model model) {
+        List<Product> products = productService.getAllProducts();
+        model.addAttribute("products", products);
+        return "products";
     }
 }
+
 

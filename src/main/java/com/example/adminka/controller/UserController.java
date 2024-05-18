@@ -1,17 +1,13 @@
 package com.example.adminka.controller;
 
-import com.example.adminka.model.Product;
 import com.example.adminka.model.User;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Arrays;
-import java.util.List;
-
-@RestController
+@Controller
 @RequestMapping("/users")
 public class UserController {
 
@@ -19,9 +15,11 @@ public class UserController {
     private ProductService productService;
 
     @GetMapping("/")
-    public User getUser() {
-        List<Product> products = productService.getAllProducts();
-        return new User(1L, "Alice", "alice@xto.com", products);
+    public String getUser(Model model) {
+        User user = new User(1L, "Alice", "alice@xto.com", productService.getAllProducts());
+        User user1 = new User(2L, "Robert", "test@test.com", productService.getAllProducts());
+        model.addAttribute("user", user);
+        model.addAttribute("user", user1);
+        return "users";
     }
 }
-
