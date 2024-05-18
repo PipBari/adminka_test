@@ -19,7 +19,7 @@ public class UserController {
         User user = new User(1L, "Alice", "alice@xto.com", productService.getAllProducts());
         User user1 = new User(2L, "Robert", "test@test.com", productService.getAllProducts());
         model.addAttribute("user", user);
-        model.addAttribute("user", user1);
+        model.addAttribute("user1", user1);
         return "users";
     }
 }
